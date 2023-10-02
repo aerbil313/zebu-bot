@@ -16,7 +16,7 @@ zebu-bot/install.sh
 Note: It may take a very long time to install the first time you do it.
 
 ## How to run
-Execute the runner:
+Execute the runner with the token:
 ```
-zebu-bot/run.sh
+zebu-bot/run.sh --token <BOT_TOKEN>
 ```
