@@ -7,6 +7,7 @@ argparse --name="run.sh" t/token= -- $argv
 
 if not set -q _flag_token
         echo 'Usage: ./run.sh [ -t | --token ] BOT_TOKEN'
+	exit
 end
 
 cd zebu-bot
