@@ -1,5 +1,6 @@
 import discord
 import responses
+import sys
 
 async def send_message(message, user_message):
     if not user_message.strip():
@@ -16,8 +17,7 @@ async def send_message(message, user_message):
         except Exception as e:
             print(e)
 
-def run_bot():
-    TOKEN = 'MTE1NzQ2NDM1MDg0ODcyNTAwMg.GrXEqi.4aLMJtmDN_RlfPokj_n9FKx0Wp5jIUUSQS3sGg'
+def run_bot(token):
     intents = discord.Intents.default()
     intents.message_content = True
     client = discord.Client(intents=intents)
@@ -41,7 +41,14 @@ def run_bot():
 
         await send_message(message, user_message)
 
-    client.run(TOKEN)
+    print(f"Bot is running with token: {token}")
+    client.run(token)
 
 if __name__ == '__main__':
-    run_bot()
+
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <BOT_TOKEN>")
+        sys.exit(1)
+
+    token = sys.argv[1]
+    run_bot(token)
