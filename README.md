@@ -5,18 +5,17 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 ```
 For more information on installing and uninstalling Nix, you can optionally check <https://zero-to-nix.com/start/install>.
 
-Download the installer:
+Clone the repository:
 ```
-git clone https://github.com/aerbil313/zebu-bot/
+nix-shell --pure --packages git cacert --run "git clone https://github.com/aerbil313/zebu-bot.git"
 ```
-Inspect the install script now if you want. Run the installer:
+Inspect the script `install.sh` now if you want. Run the installer:
 ```
 zebu-bot/install.sh
 ```
 Note: It may take a very long time to install the first time you do it.
 
 ## How to run
-
 Execute the runner:
 ```
 zebu-bot/run.sh
