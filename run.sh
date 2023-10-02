@@ -5,4 +5,4 @@
 
 cd zebu-bot
 source bin/activate.fish
-python3 zebu-bot/src/main.py
+python3 src/main.py
