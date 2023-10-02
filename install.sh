@@ -6,5 +6,5 @@
 cd zebu-bot
 python3 -m venv .
 source bin/activate.fish
-pip install -r requirements.txt
+pip install -r src/requirements.txt
 exit
