@@ -4,7 +4,7 @@
 #! nix-shell --packages fish cacert python311
 
 cd zebu-bot
-python3 -m venv python-venv
+python3 -m venv venv
 source venv/bin/activate.fish
 pip install -r src/requirements.txt
 exit
