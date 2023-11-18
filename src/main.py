@@ -1,48 +1,7 @@
-import discord
-import responses
 import sys
-
-async def send_message(message, user_message):
-    if not user_message.strip():
-        print("Received an empty message.")
-    else:
-        try:
-            response = responses.handle_response(user_message)
-            if response:
-                await message.channel.send(response)
-            else:
-                print(f"Empty response for message: {user_message}")
-        except discord.Forbidden:
-            print("Permission error: bot can't send messages.")
-        except Exception as e:
-            print(e)
-
-def run_bot(token):
-    intents = discord.Intents.default()
-    intents.message_content = True
-    client = discord.Client(intents=intents)
-
-    @client.event
-    async def on_ready():
-        print(f'{client.user} is now running!')
-
-
-    @client.event
-    async def on_message(message):
-        if message.author == client.user:
-            return
-
-        username = str(message.author)
-        user_message = str(message.content)
-
-        channel = str(message.channel)
-
-        print(f"{username} said: '{user_message}' ({channel})")
-
-        await send_message(message, user_message)
-
-    print(f"Bot is running with token: {token}")
-    client.run(token)
+import discord
+from random import choice
+from zebu_patterns import patterns
 
 if __name__ == '__main__':
 
@@ -51,4 +10,27 @@ if __name__ == '__main__':
         sys.exit(1)
 
     token = sys.argv[1]
-    run_bot(token)
+
+    bot = discord.Bot()
+
+    @bot.event
+    async def on_ready():
+        print(f"Logged in as {bot.user.name}")
+        print(f"Running with token: {token}")
+
+    @bot.slash_command(description="Generate a zebu prompt.")
+    async def zebu(ctx):
+        key = choice(list(patterns.keys()))
+        response = key + "\n" + patterns[key]
+        await ctx.respond(response)
+
+    @bot.slash_command(description="List all zebu prompts.")
+    async def zebu_list_patterns(ctx):
+        r = 1
+        response = ""
+        for i, x in patterns.items():
+            response += f"{r}. {i}\n"
+            r += 1
+        await ctx.respond(response)
+
+    bot.run(token)

@@ -10,6 +10,11 @@ if not set -q _flag_token
 	exit
 end
 
-cd zebu-bot
-source bin/activate.fish
+cd zebu-bot 
+if test $status != 0
+  echo "\nError: Please run this script from the directory which contains the zebu-bot repository."
+  exit
+end
+
+source venv/bin/activate.fish
 python3 src/main.py $_flag_token

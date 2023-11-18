@@ -4,6 +4,12 @@
 #! nix-shell --packages fish cacert python311
 
 cd zebu-bot
+if test $status != 0
+  echo "\nError: Please run this script from the directory which contains the zebu-bot repository."
+  exit
+end
+
+rm -rf venv/
 python3 -m venv venv
 source venv/bin/activate.fish
 pip install -r src/requirements.txt
